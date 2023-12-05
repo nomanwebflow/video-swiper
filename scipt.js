@@ -1,12 +1,14 @@
 const loopValue = true;
 const grabCursor = true;
 const keyControl = true;
-const initialSlide = 6;
+const initialSlide = 10;
+const speed = 200;
 
 const videoSwiper = new Swiper(".swiper.is-video-swiper", {
-  speed: 400,
+  speed: speed,
   spaceBetween: 0,
   initialSlide: initialSlide,
+  slideActiveClass: "current-video-slide",
   loop: loopValue,
   grabCursor: grabCursor,
   navigation: {
@@ -18,16 +20,8 @@ const videoSwiper = new Swiper(".swiper.is-video-swiper", {
   },
 });
 
-const headingSwiper = new Swiper(".swiper.is-heading-swiper", {
-  speed: 400,
-  spaceBetween: 0,
-  initialSlide: initialSlide,
-  loop: loopValue,
-  direction: "vertical",
-  grabCursor: grabCursor,
-});
 const photoSwiper = new Swiper(".swiper.is-photo-swiper", {
-  speed: 400,
+  speed: speed,
   spaceBetween: 16,
   slidesPerView: 2.5,
   centeredSlides: true,
@@ -51,6 +45,22 @@ const photoSwiper = new Swiper(".swiper.is-photo-swiper", {
   },
 });
 
-photoSwiper.controller.control = videoSwiper;
-videoSwiper.controller.control = photoSwiper;
-photoSwiper.controller.control = headingSwiper;
+const headingSwiper = new Swiper(".swiper.is-heading-swiper", {
+  speed: speed,
+  spaceBetween: 0,
+  initialSlide: initialSlide,
+  loop: loopValue,
+  direction: "vertical",
+});
+
+const contentSwiper = new Swiper(".swiper.is-content-swiper", {
+  speed: speed,
+  spaceBetween: 0,
+  initialSlide: initialSlide,
+  loop: loopValue,
+  direction: "vertical",
+});
+
+videoSwiper.controller.control = [photoSwiper, headingSwiper, contentSwiper];
+photoSwiper.controller.control = [videoSwiper, headingSwiper, contentSwiper];
+
