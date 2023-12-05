@@ -48,3 +48,5 @@ const photoSwiper = new Swiper(".swiper.is-photo-swiper", {
 
 videoSwiper.controller.control = [photoSwiper, headingSwiper, contentSwiper];
 photoSwiper.controller.control = [videoSwiper, headingSwiper, contentSwiper];
+headingSwiper.controller.control = [videoSwiper, photoSwiper, contentSwiper];
+contentSwiper.controller.control = [videoSwiper, photoSwiper, headingSwiper];
